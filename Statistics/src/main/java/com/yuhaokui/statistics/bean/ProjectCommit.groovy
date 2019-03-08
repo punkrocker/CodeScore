@@ -2,6 +2,7 @@ package com.yuhaokui.statistics.bean
 
 class ProjectCommit {
     Integer id
-    String name
+    String groupName
+    String projectName
     Integer commitCount
 }

@@ -5,11 +5,12 @@
 <mapper namespace="com.yuhaokui.statistics.mapper.CommitMapper">
 
     <select id="getProjectCommitCounts" resultType="ProjectCommit">
-       select p.id, p.name, sum(t1.commit_count) as commitCount from push_event_payloads t1
+       select p.id, n.name as groupName, p.name as projectName, sum(t1.commit_count) as commitCount from push_event_payloads t1
        left join events e on t1.event_id = e.id
        left join projects p on e.project_id = p.id
-       where e.action = 5
-       group by p.id, p.name;
+       left join namespaces n on n.id = p.namespace_id
+       where e.action = 5 and e.updated_at between '${beginDate}' and '${endDate}'
+       group by p.id, n.name, p.name;
     </select>
 
 </mapper>

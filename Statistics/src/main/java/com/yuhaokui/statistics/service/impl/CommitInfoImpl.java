@@ -15,6 +15,6 @@ public class CommitInfoImpl implements ICommitInfo {
 
     @Override
     public List<ProjectCommit> getProjectCommits() {
-        return commitMapper.getProjectCommitCounts();
+        return commitMapper.getProjectCommitCounts("2019-02-01", "2019-02-28");
     }
 }
