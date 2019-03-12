@@ -13,4 +13,15 @@
        group by p.id, n.name, p.name;
     </select>
 
+    <select id="getUserCommitCounts" resultType="UserCommit">
+        select p.id as projectId, n.name as groupName, p.name as projectName, u.name as userName, sum(t1.commit_count) as commitCount
+        from push_event_payloads t1
+        left join events e on t1.event_id = e.id
+        left join projects p on e.project_id = p.id
+        left join namespaces n on n.id = p.namespace_id
+        left join users u on u.id = e.author_id
+        where e.action = 5 and e.updated_at between '${beginDate}' and '${endDate}'
+        group by p.id, n.name, p.name, u.name;
+    </select>
+
 </mapper>
