@@ -5,4 +5,5 @@ class ProjectCommit {
     String groupName
     String projectName
     Integer commitCount
+    List<UserCommit> userCommits
 }

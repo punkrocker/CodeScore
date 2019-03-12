@@ -6,4 +6,5 @@ class UserCommit {
     String groupName
     String projectName
     Integer commitCount
+    Float percent
 }
