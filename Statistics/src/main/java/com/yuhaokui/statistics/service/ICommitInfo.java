@@ -8,4 +8,5 @@ import java.util.List;
 public interface ICommitInfo {
     List<ProjectCommit> getProjectCommits();
     List<UserCommit> getUserCommits();
+    List<ProjectCommit> getFinalCommits();
 }

@@ -6,4 +6,8 @@ class ProjectCommit {
     String projectName
     Integer commitCount
     List<UserCommit> userCommits
+
+    ProjectCommit() {
+        userCommits = new ArrayList<>()
+    }
 }

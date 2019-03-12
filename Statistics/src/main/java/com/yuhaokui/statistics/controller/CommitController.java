@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -23,5 +24,22 @@ public class CommitController {
     @RequestMapping("/getUserCommits")
     public List<UserCommit> getUserCommits() {
         return commitInfo.getUserCommits();
+    }
+
+    @RequestMapping("/getFinalCommit")
+    public List<ProjectCommit> getFinalCommits() {
+        List<ProjectCommit> projectCommits = commitInfo.getProjectCommits();
+        List<UserCommit> userCommits = commitInfo.getUserCommits();
+        HashMap<Integer, ProjectCommit> projectMap = new HashMap<>();
+        for (ProjectCommit projectCommit :
+                projectCommits) {
+            projectMap.put(projectCommit.getId(), projectCommit);
+        }
+        for (UserCommit userCommit: userCommits) {
+            ProjectCommit selectedProjectCommit = projectMap.get(userCommit.getProjectId());
+            userCommit.setPercent(userCommit.getCommitCount() * 1.0f / selectedProjectCommit.getCommitCount());
+            selectedProjectCommit.getUserCommits().add(userCommit);
+        }
+        return projectCommits;
     }
 }

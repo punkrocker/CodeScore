@@ -29,4 +29,10 @@ public class CommitInfoImpl implements ICommitInfo {
         DateRegion dateRegion = new DateRegion();
         return commitMapper.getUserCommitCounts(dateRegion.getBeginDate(), dateRegion.getEndDate());
     }
+
+    @Override
+    public List<ProjectCommit> getFinalCommits() {
+        DateRegion dateRegion = new DateRegion();
+        return null;
+    }
 }
