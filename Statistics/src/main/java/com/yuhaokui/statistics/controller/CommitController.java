@@ -40,13 +40,13 @@ public class CommitController {
                 projectCommits) {
             projectMap.put(projectCommit.getId(), projectCommit);
         }
-        for (UserCommit userCommit: userCommits) {
+        for (UserCommit userCommit : userCommits) {
             ProjectCommit selectedProjectCommit = projectMap.get(userCommit.getProjectId());
             userCommit.setPercent(userCommit.getCommitCount() * 1.0f / selectedProjectCommit.getCommitCount());
             selectedProjectCommit.getUserCommits().add(userCommit);
         }
-        projectCommits.forEach((commitInfo)->{
-            commitInfo.setGitPath(baseUrl + "/" + commitInfo.getGroupName() + "/" + commitInfo.getProjectPath() + ".git");
+        projectCommits.forEach((commitInfo) -> {
+            commitInfo.setGitPath(String.format("%s/%s/%s.git", baseUrl, commitInfo.getGroupName(), commitInfo.getProjectPath()));
         });
         return projectCommits;
     }
