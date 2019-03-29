@@ -3,7 +3,7 @@ package com.yuhaokui.statistics.bean
 class ProjectCommit {
     Integer id
     String groupName
-    String projectName
+    String projectPath
     Integer commitCount
     List<UserCommit> userCommits
 
