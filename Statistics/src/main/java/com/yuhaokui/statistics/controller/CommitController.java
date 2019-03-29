@@ -5,6 +5,8 @@ import com.yuhaokui.statistics.bean.UserCommit;
 import com.yuhaokui.statistics.mapper.CommitMapper;
 import com.yuhaokui.statistics.service.impl.CommitInfoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,9 @@ import java.util.List;
 public class CommitController {
     @Autowired
     private CommitInfoImpl commitInfo;
+
+    @Value("${git.baseurl}")
+    private String baseUrl;
 
     @RequestMapping("/getProjectCommits")
     public List<ProjectCommit> getProjectCommits() {
@@ -40,6 +45,9 @@ public class CommitController {
             userCommit.setPercent(userCommit.getCommitCount() * 1.0f / selectedProjectCommit.getCommitCount());
             selectedProjectCommit.getUserCommits().add(userCommit);
         }
+        projectCommits.forEach((commitInfo)->{
+            commitInfo.setGitPath(baseUrl + "/" + commitInfo.getGroupName() + "/" + commitInfo.getProjectPath() + ".git");
+        });
         return projectCommits;
     }
 }
