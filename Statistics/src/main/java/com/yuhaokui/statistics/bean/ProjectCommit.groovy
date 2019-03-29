@@ -4,6 +4,7 @@ class ProjectCommit {
     Integer id
     String groupName
     String projectPath
+    String gitPath
     Integer commitCount
     List<UserCommit> userCommits
 
