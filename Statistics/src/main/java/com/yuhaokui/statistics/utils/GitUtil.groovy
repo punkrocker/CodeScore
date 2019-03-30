@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Value
 
 class GitUtil {
 
-    @Value('${git.workspace}')
     String workSpace
+
+    void clone(String gitAddr) {
+        ("git clone " + gitAddr).execute()
+    }
 }
