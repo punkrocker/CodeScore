@@ -18,7 +18,7 @@ class GitUtil {
         this.baseUrl = baseUrl
     }
 
-    void clone(String gitAddr) {
+    String clone(String gitAddr) {
         ("git clone " + gitAddr).execute()
     }
 
