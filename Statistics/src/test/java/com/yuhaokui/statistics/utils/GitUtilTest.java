@@ -9,6 +9,6 @@ class GitUtilTest {
     @Test
     void cloneTest() {
         GitUtil gitUtil = new GitUtil();
-        System.out.println(gitUtil.clone("http://211.medicalai.net:8012/Gauge/ScaleReact.git"));
+        System.out.println(gitUtil.clone("http://tmember:123123123@localhost:8000/yuhaokui/testproject2.git"));
     }
 }
