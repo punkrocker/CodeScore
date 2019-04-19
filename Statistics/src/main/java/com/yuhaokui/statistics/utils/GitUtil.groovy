@@ -26,10 +26,6 @@ class GitUtil {
         String sperator = File.separatorChar
         int endIndex = dest.lastIndexOf(sperator)
         dest = dest.substring(0, endIndex)
-        File workspaceDir = new File(GitUtil.workSpace)
-        if (!workspaceDir.exists()) {
-            workspaceDir.mkdir()
-        }
         File destFile = new File(dest)
         if (!destFile.exists()) {
             destFile.mkdir()
