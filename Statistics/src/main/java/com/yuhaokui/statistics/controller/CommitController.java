@@ -47,9 +47,4 @@ public class CommitController {
         return projectCommits;
     }
 
-    @RequestMapping("/")
-    public String sp() {
-        GitUtil g = new GitUtil();
-        return GitUtil.getWorkSpace();
-    }
 }
