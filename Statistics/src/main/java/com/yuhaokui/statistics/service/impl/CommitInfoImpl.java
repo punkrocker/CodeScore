@@ -7,6 +7,7 @@ import com.yuhaokui.statistics.mapper.CommitMapper;
 import com.yuhaokui.statistics.service.ICommitInfo;
 import com.yuhaokui.statistics.utils.GitUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
