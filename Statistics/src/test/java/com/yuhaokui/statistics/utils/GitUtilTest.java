@@ -20,8 +20,7 @@ import java.util.List;
 @EnableAsync
 @ComponentScan(basePackages = "com.yuhaokui.statistics.*")
 @PropertySource({
-        "classpath:application.properties",
-        "classpath:application-dev.properties"
+        "classpath:application-pro.properties"
 })
 class GitUtilTest {
 

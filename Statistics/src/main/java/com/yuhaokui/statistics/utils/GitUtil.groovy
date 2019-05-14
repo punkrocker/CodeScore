@@ -22,7 +22,9 @@ class GitUtil {
     }
 
     String clone(String gitAddr) {
-        String dest = GitUtil.workSpace + gitAddr
+        String remotePath = gitAddr.replace(GitUtil.baseUrl, "")
+                .replace(".git", "")
+        String dest = GitUtil.workSpace + remotePath
         String sperator = File.separatorChar
         int endIndex = dest.lastIndexOf(sperator)
         dest = dest.substring(0, endIndex)
@@ -30,8 +32,9 @@ class GitUtil {
         if (!destFile.exists()) {
             destFile.mkdir()
         }
-        String cmd = "git clone " + GitUtil.baseUrl + gitAddr + ".git " + GitUtil.workSpace + gitAddr
-        cmd.execute()
+        String cmd = "git clone " + gitAddr + " " + GitUtil.workSpace + remotePath
+        println(cmd)
+        println(cmd.execute())
     }
 
 }
