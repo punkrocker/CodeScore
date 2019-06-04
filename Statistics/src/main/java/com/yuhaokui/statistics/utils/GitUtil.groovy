@@ -33,8 +33,9 @@ class GitUtil {
             destFile.mkdir()
         }
         String cmd = "git clone " + gitAddr + " " + GitUtil.workSpace + remotePath
+//        git clone没有打印信息，所以需要打印执行的命令
         println(cmd)
-        println(cmd.execute())
+        println(cmd.execute().text)
     }
 
 }
