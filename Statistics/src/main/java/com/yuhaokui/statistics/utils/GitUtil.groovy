@@ -36,6 +36,7 @@ class GitUtil {
 //        git clone没有打印信息，所以需要打印执行的命令
         println(cmd)
         println(cmd.execute().text)
+        GitUtil.workSpace + remotePath
     }
 
 }
