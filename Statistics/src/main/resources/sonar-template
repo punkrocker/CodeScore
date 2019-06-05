@@ -1,0 +1,8 @@
+# 设置一个唯一的Key
+sonar.projectKey=key
+# 在查看结果时的Project名
+sonar.projectName={$projectName}
+sonar.projectVersion=1.0
+
+#代码路径，如果是maven项目，通常是src
+sonar.sources={$sourceDir}
