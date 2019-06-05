@@ -2,7 +2,6 @@ package com.yuhaokui.statistics.utils
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import java.io.File
 
 @Component
 class GitUtil {
@@ -25,8 +24,7 @@ class GitUtil {
         String remotePath = gitAddr.replace(GitUtil.baseUrl, "")
                 .replace(".git", "")
         String dest = GitUtil.workSpace + remotePath
-        String sperator = File.separatorChar
-        int endIndex = dest.lastIndexOf(sperator)
+        int endIndex = dest.lastIndexOf(File.separatorChar as String)
         dest = dest.substring(0, endIndex)
         File destFile = new File(dest)
         if (!destFile.exists()) {
