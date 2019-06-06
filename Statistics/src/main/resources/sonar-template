@@ -1,5 +1,5 @@
 # 设置一个唯一的Key
-sonar.projectKey=key
+sonar.projectKey={$key}
 # 在查看结果时的Project名
 sonar.projectName={$projectName}
 sonar.projectVersion=1.0
