@@ -34,7 +34,7 @@ class GitUtil {
         cmd.execute().text
         destFile = new File(GitUtil.workSpace + remotePath)
         if (!destFile.exists()) {
-            return "error:" + GitUtil.workSpace + remotePath
+            return AppConst.ERROR_INFO + GitUtil.workSpace + remotePath
         }
         GitUtil.workSpace + remotePath
     }
