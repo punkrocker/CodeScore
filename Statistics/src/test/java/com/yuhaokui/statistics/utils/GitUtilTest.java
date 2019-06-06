@@ -32,7 +32,7 @@ class GitUtilTest {
         GitUtil gitUtil = new GitUtil();
         List<ProjectCommit> projectCommits = commitInfos.getFinalCommits();
         projectCommits.forEach((commitInfo) -> {
-            gitUtil.clone(commitInfo.getGitPath());
+            System.out.println(gitUtil.clone(commitInfo.getGitPath()));
         });
     }
 }
