@@ -1,12 +1,21 @@
 package com.yuhaokui.statistics.utils
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.ClassPathResource
+import org.springframework.stereotype.Component
 
 import javax.annotation.Resource
 import java.nio.file.Files
 import java.nio.file.Paths
 
+@Component
 class SonarUtil {
+    static String sonarDir
+
+    @Value('${sonar.dir}')
+    String setSonarDir(String dir) {
+        this.sonarDir = dir
+    }
 
     String checkConfigFile(String dir) {
         String filePath = dir + File.separatorChar + 'sonar-project.properties'
@@ -27,5 +36,11 @@ class SonarUtil {
         sb.append('sonar.projectVersion=1.0' + '\n')
         sb.append('sonar.sources=src' + '\n')
         file.write(sb.toString())
+    }
+
+    def startSonarService() {
+        String startServiceCmd = 'sh ' + SonarUtil.sonarDir + ' console'
+        def startProcess = (startServiceCmd).execute()
+        startProcess.waitFor()
     }
 }

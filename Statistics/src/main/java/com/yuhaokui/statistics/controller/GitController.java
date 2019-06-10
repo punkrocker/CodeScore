@@ -30,4 +30,11 @@ public class GitController {
         });
         return "success";
     }
+
+    @RequestMapping("/hi")
+    public String startService() {
+        SonarUtil sonarUtil = new SonarUtil();
+        sonarUtil.startSonarService();
+        return "success";
+    }
 }
