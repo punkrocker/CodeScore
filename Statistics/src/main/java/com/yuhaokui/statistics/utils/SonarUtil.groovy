@@ -17,6 +17,8 @@ class SonarUtil {
         this.sonarDir = dir
     }
 
+    Process serviceProcess;
+
     String checkConfigFile(String dir) {
         String filePath = dir + File.separatorChar + 'sonar-project.properties'
         File configFile = new File(filePath)
@@ -40,7 +42,9 @@ class SonarUtil {
 
     def startSonarService() {
         String startServiceCmd = 'sh ' + SonarUtil.sonarDir + ' console'
-        def startProcess = (startServiceCmd).execute()
-        startProcess.waitFor()
+        serviceProcess = (startServiceCmd).execute()
+        while (true) {
+            serviceProcess.waitFor()
+        }
     }
 }
