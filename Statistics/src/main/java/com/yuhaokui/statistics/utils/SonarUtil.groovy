@@ -43,8 +43,7 @@ class SonarUtil {
     def startSonarService() {
         String startServiceCmd = 'sh ' + SonarUtil.sonarDir + ' console'
         serviceProcess = (startServiceCmd).execute()
-        while (true) {
-            serviceProcess.waitFor()
-        }
+        System.out.println("start service:" + startServiceCmd)
+        serviceProcess.waitFor()
     }
 }
