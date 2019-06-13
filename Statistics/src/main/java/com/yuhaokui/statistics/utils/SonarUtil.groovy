@@ -12,7 +12,12 @@ class SonarUtil {
         this.sonarDir = dir
     }
 
-    Process serviceProcess;
+    static String sonarScannerDir
+
+    @Value('${sonar.scanner.dir}')
+    String setSonarScannerDir(String dir) {
+        this.sonarScannerDir = dir
+    }
 
     String checkConfigFile(String dir) {
         String filePath = dir + File.separatorChar + 'sonar-project.properties'
@@ -32,12 +37,20 @@ class SonarUtil {
         sb.append('sonar.projectName=' + paths[-3] + paths[-2] + '\n')
         sb.append('sonar.projectVersion=1.0' + '\n')
         sb.append('sonar.sources=src' + '\n')
+        sb.append('sonar.java.binaries=target' + (File.separatorChar as String) + 'classes' + '\n')
         file.write(sb.toString())
     }
 
     def startSonarService() {
         String startServiceCmd = 'sh ' + SonarUtil.sonarDir + ' console'
-        serviceProcess = (startServiceCmd).execute()
+        Process serviceProcess = startServiceCmd.execute()
         serviceProcess.waitFor()
+    }
+
+    def scanProject(String projectDir) {
+        String scanCmd = 'cd ' + projectDir + ' && ' + SonarUtil.sonarScannerDir
+        Process scanProcess = scanCmd.execute()
+        scanProcess.waitFor()
+        scanProcess.destroy()
     }
 }
