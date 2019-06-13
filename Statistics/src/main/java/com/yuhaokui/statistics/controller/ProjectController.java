@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/git")
-public class GitController {
+@RequestMapping("/project")
+public class ProjectController {
     @Autowired
     CommitInfoImpl commitInfos;
 
-    @RequestMapping("/")
+    @RequestMapping("/git")
     public String index() {
         GitUtil gitUtil = new GitUtil();
         SonarUtil sonarUtil = new SonarUtil();
@@ -31,4 +31,8 @@ public class GitController {
         return "success";
     }
 
+    @RequestMapping("/scan")
+    public String scan() {
+        return "success";
+    }
 }
