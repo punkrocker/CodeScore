@@ -3,13 +3,10 @@ package com.yuhaokui.statistics.controller;
 import com.yuhaokui.statistics.bean.ProjectCommit;
 import com.yuhaokui.statistics.bean.UserCommit;
 import com.yuhaokui.statistics.service.impl.CommitInfoImpl;
-import com.yuhaokui.statistics.utils.GitUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 
 @RestController

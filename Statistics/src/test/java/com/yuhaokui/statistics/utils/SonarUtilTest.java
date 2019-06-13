@@ -1,13 +1,12 @@
 package com.yuhaokui.statistics.utils;
 
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.PropertySource;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @PropertySource({
         "classpath:application-pro.properties"
