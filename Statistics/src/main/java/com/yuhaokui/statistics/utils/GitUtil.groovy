@@ -20,6 +20,10 @@ class GitUtil {
         this.baseUrl = baseUrl
     }
 
+    def cleanWorkSpace() {
+        ("rm -rf " + GitUtil.workSpace).execute()
+    }
+
     String clone(String gitAddr) {
         String remotePath = gitAddr.replace(GitUtil.baseUrl, "")
                 .replace(".git", "")
