@@ -20,6 +20,7 @@ public class ProjectController {
     @RequestMapping("/git")
     public String index() {
         GitUtil gitUtil = new GitUtil();
+        gitUtil.cleanWorkSpace();
         SonarUtil sonarUtil = new SonarUtil();
         List<ProjectCommit> projectCommits = commitInfos.getFinalCommits();
         projectCommits.forEach((commitInfo) -> {
