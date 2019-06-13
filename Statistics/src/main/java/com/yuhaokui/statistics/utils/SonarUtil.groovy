@@ -37,8 +37,17 @@ class SonarUtil {
         sb.append('sonar.projectName=' + paths[-3] + paths[-2] + '\n')
         sb.append('sonar.projectVersion=1.0' + '\n')
         sb.append('sonar.sources=src' + '\n')
-        sb.append('sonar.java.binaries=target' + (File.separatorChar as String) + 'classes' + '\n')
+        addMavenJavaProjectConfig(file, paths, sb)
         file.write(sb.toString())
+    }
+
+    private void addMavenJavaProjectConfig(File file, String[] paths, StringBuilder sb) {
+        String pomFilePath = file.path.replace(paths[-1], AppConst.POM_FILE)
+        File pomFile = new File(pomFilePath)
+        if (pomFile.exists()) {
+            "mvn package".execute()
+            sb.append('sonar.java.binaries=target' + (File.separatorChar as String) + 'classes' + '\n')
+        }
     }
 
     def startSonarService() {
