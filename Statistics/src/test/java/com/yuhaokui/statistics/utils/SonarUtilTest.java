@@ -2,12 +2,21 @@ package com.yuhaokui.statistics.utils;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@EnableAsync
+@ComponentScan(basePackages = "com.yuhaokui.statistics.*")
 @PropertySource({
         "classpath:application-pro.properties"
 })
@@ -29,10 +38,8 @@ class SonarUtilTest {
     }
 
     @Test
-    void startSonar() {
+    void startScan() {
         SonarUtil sonarUtil = new SonarUtil();
-        sonarUtil.startSonarService();
-        String cmd = "curl http://localhost:9000";
-
+        sonarUtil.scanProject("/Users/dennisyu/git_workspace/SanHe/server/");
     }
 }
