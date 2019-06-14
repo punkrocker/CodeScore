@@ -46,8 +46,7 @@ class SonarUtil {
         File pomFile = new File(projectPath + AppConst.POM_FILE)
         if (pomFile.exists()) {
             String buildCmd = "mvn package -Dmaven.test.skip=true"
-            Process scanProcess = Runtime.getRuntime().exec(buildCmd, null, new File(projectPath))
-            scanProcess.waitFor()
+            Runtime.getRuntime().exec(buildCmd, null, new File(projectPath))
             sb.append('sonar.java.binaries=target' + (File.separatorChar as String) + 'classes' + '\n')
         }
     }
