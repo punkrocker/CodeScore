@@ -57,9 +57,9 @@ class SonarUtil {
     }
 
     def scanProject(String projectDir) {
-        String scanCmd = 'cd ' + projectDir + ' && ' + SonarUtil.sonarScannerDir
-        Process scanProcess = scanCmd.execute()
+        String scanCmd = SonarUtil.sonarScannerDir
+        File dir = new File(projectDir)
+        Process scanProcess = Runtime.getRuntime().exec(scanCmd, null, dir)
         scanProcess.waitFor()
-        scanProcess.destroy()
     }
 }
