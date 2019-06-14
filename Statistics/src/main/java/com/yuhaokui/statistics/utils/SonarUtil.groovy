@@ -45,7 +45,7 @@ class SonarUtil {
         String pomFilePath = file.path.replace(paths[-1], AppConst.POM_FILE)
         File pomFile = new File(pomFilePath)
         if (pomFile.exists()) {
-            "mvn package".execute()
+            "mvn package -Dmaven.test.skip=true".execute()
             sb.append('sonar.java.binaries=target' + (File.separatorChar as String) + 'classes' + '\n')
         }
     }
