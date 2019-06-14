@@ -42,10 +42,12 @@ class SonarUtil {
     }
 
     private void addMavenJavaProjectConfig(File file, String[] paths, StringBuilder sb) {
-        String pomFilePath = file.path.replace(paths[-1], AppConst.POM_FILE)
-        File pomFile = new File(pomFilePath)
+        String projectPath = file.path.replace(paths[-1], "")
+        File pomFile = new File(projectPath + AppConst.POM_FILE)
         if (pomFile.exists()) {
-            "mvn package -Dmaven.test.skip=true".execute()
+            String buildCmd = "mvn package -Dmaven.test.skip=true"
+            Process scanProcess = Runtime.getRuntime().exec(buildCmd, null, new File(projectPath))
+            scanProcess.waitFor()
             sb.append('sonar.java.binaries=target' + (File.separatorChar as String) + 'classes' + '\n')
         }
     }
