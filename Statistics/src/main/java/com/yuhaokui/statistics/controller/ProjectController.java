@@ -1,7 +1,9 @@
 package com.yuhaokui.statistics.controller;
 
 import com.yuhaokui.statistics.bean.ProjectCommit;
+import com.yuhaokui.statistics.bean.SonarProject;
 import com.yuhaokui.statistics.service.impl.CommitInfoImpl;
+import com.yuhaokui.statistics.service.impl.SonarInfoImpl;
 import com.yuhaokui.statistics.utils.AppConst;
 import com.yuhaokui.statistics.utils.GitUtil;
 import com.yuhaokui.statistics.utils.SonarUtil;
@@ -16,6 +18,9 @@ import java.util.List;
 public class ProjectController {
     @Autowired
     CommitInfoImpl commitInfos;
+
+    @Autowired
+    SonarInfoImpl sonarInfo;
 
     @RequestMapping("/git")
     public String index() {
@@ -34,5 +39,10 @@ public class ProjectController {
     @RequestMapping("/scan")
     public String scan() {
         return "success";
+    }
+
+    @RequestMapping("/sonar")
+    public List<SonarProject> hi() {
+        return sonarInfo.getSonarProjects();
     }
 }
