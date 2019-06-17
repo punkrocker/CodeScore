@@ -5,7 +5,7 @@
 <mapper namespace="com.yuhaokui.statistics.mapper.SonarMapper">
 
     <select id="getSonarProject" resultType="SonarProject">
-       select name from PROJECTS where SCOPE = 'PRJ';
+       select NAME from PROJECTS where SCOPE = 'PRJ';
     </select>
 
 </mapper>
