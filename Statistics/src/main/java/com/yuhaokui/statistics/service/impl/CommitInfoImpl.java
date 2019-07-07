@@ -30,8 +30,13 @@ public class CommitInfoImpl implements ICommitInfo {
     }
 
     @Override
-    public List<ProjectCommit> getFinalCommits() {
-        DateRegion dateRegion = new DateRegion();
+    public List<ProjectCommit> getFinalCommits(int month) {
+        DateRegion dateRegion;
+        if (month == 0)
+            dateRegion = new DateRegion();
+        else
+            dateRegion = new DateRegion(month);
+
         List<ProjectCommit> projectCommits = commitMapper.getProjectCommitCounts(dateRegion.getBeginDate(), dateRegion.getEndDate());
         List<UserCommit> userCommits = commitMapper.getUserCommitCounts(dateRegion.getBeginDate(), dateRegion.getEndDate());
         HashMap<Integer, ProjectCommit> projectMap = new HashMap<>();

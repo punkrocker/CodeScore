@@ -23,11 +23,11 @@ public class ProjectController {
     SonarInfoImpl sonarInfo;
 
     @RequestMapping("/git")
-    public String index() {
+    public String index(int month) {
         GitUtil gitUtil = new GitUtil();
         gitUtil.cleanWorkSpace();
         SonarUtil sonarUtil = new SonarUtil();
-        List<ProjectCommit> projectCommits = commitInfos.getFinalCommits();
+        List<ProjectCommit> projectCommits = commitInfos.getFinalCommits(month);
         projectCommits.forEach((commitInfo) -> {
             String workPath = gitUtil.clone(commitInfo.getGitPath());
             if (!workPath.startsWith(AppConst.ERROR_INFO))

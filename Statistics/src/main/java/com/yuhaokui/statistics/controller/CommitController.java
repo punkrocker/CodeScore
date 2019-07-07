@@ -25,8 +25,8 @@ public class CommitController {
     }
 
     @RequestMapping("/getFinalCommit")
-    public List<ProjectCommit> getFinalCommits() {
-        return commitInfo.getFinalCommits();
+    public List<ProjectCommit> getFinalCommits(int month) {
+        return commitInfo.getFinalCommits(month);
     }
 
 }

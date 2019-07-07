@@ -9,7 +9,9 @@ class DateRegionTest {
 
     @Test
     public void makeDate() {
-        DateRegion dateRegion = new DateRegion(6);
+        DateRegion dateRegion = new DateRegion();
+        Assert.assertEquals("", "2019-07-01", dateRegion.getBeginDate());
+        dateRegion = new DateRegion(6);
         Assert.assertEquals("", "2019-06-01", dateRegion.getBeginDate());
     }
 

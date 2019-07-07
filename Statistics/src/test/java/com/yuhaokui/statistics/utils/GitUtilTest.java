@@ -28,7 +28,7 @@ class GitUtilTest {
     @Test
     void cloneTest() {
         GitUtil gitUtil = new GitUtil();
-        List<ProjectCommit> projectCommits = commitInfos.getFinalCommits();
+        List<ProjectCommit> projectCommits = commitInfos.getFinalCommits(0);
         projectCommits.forEach((commitInfo) -> {
             System.out.println(gitUtil.clone(commitInfo.getGitPath()));
         });
