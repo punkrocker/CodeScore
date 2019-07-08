@@ -9,6 +9,7 @@ import com.yuhaokui.statistics.utils.GitUtil;
 import com.yuhaokui.statistics.utils.SonarUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class ProjectController {
     SonarInfoImpl sonarInfo;
 
     @RequestMapping("/git")
-    public String index(int month) {
+    public String index(@RequestParam(value = "month", defaultValue = "0") int month) {
         GitUtil gitUtil = new GitUtil();
         gitUtil.cleanWorkSpace();
         SonarUtil sonarUtil = new SonarUtil();
