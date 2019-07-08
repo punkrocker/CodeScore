@@ -3,7 +3,7 @@ package com.yuhaokui.statistics.service.impl;
 import com.yuhaokui.statistics.bean.DateRegion;
 import com.yuhaokui.statistics.bean.ProjectCommit;
 import com.yuhaokui.statistics.bean.UserCommit;
-import com.yuhaokui.statistics.mapper.CommitMapper;
+import com.yuhaokui.statistics.mapper.git.CommitMapper;
 import com.yuhaokui.statistics.service.ICommitInfo;
 import com.yuhaokui.statistics.utils.GitUtil;
 import org.springframework.beans.factory.annotation.Autowired;

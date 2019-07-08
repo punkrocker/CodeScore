@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yuhaokui.statistics.mapper.CommitMapper">
+<mapper namespace="com.yuhaokui.statistics.mapper.git.CommitMapper">
 
     <select id="getProjectCommitCounts" resultType="ProjectCommit">
        select p.id, n.name as groupName, p.path as projectPath, sum(t1.commit_count) as commitCount from push_event_payloads t1

@@ -1,4 +1,4 @@
-package com.yuhaokui.statistics.mapper;
+package com.yuhaokui.statistics.mapper.sonar;
 
 import com.yuhaokui.statistics.bean.SonarProject;
 import org.apache.ibatis.annotations.Mapper;
