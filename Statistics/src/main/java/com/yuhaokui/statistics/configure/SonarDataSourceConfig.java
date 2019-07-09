@@ -10,11 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.yuhaokui.statistics.mapper.sonar", sqlSessionFactoryRef = "sonarSqlSessionFactory")
+@MapperScan(basePackages = "com.yuhaokui.statistics.mapper.sonar")
 public class SonarDataSourceConfig {
 
     @Bean(name = "sonarDataSource")
@@ -23,12 +24,17 @@ public class SonarDataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "sonarSqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("sonarDataSource") DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
-        sessionFactoryBean.setDataSource(dataSource);
-        sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources("classpath:com/yuhaokui/statistics/mapper/sonar/*.xml"));
-        return sessionFactoryBean.getObject();
+//    @Bean(name = "sonarSqlSessionFactory")
+//    public SqlSessionFactory sqlSessionFactory(@Qualifier("sonarDataSource") DataSource dataSource) throws Exception {
+//        SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+//        sessionFactoryBean.setDataSource(dataSource);
+//        sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
+//                .getResources("classpath:com/yuhaokui/statistics/mapper/sonar/*.xml"));
+//        return sessionFactoryBean.getObject();
+//    }
+
+    @Bean(name = "sonarTemplate")
+    public JdbcTemplate gitTemplate(@Qualifier("sonarDataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 }
