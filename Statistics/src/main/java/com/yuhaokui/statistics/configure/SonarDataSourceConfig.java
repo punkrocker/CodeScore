@@ -18,11 +18,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.yuhaokui.statistics.mapper.sonar")
 public class SonarDataSourceConfig {
 
-    @Bean(name = "sonarDataSource")
-    @ConfigurationProperties("spring.datasource.sonar")
-    public DataSource masterDataSource() {
-        return DataSourceBuilder.create().build();
-    }
+
 
 //    @Bean(name = "sonarSqlSessionFactory")
 //    public SqlSessionFactory sqlSessionFactory(@Qualifier("sonarDataSource") DataSource dataSource) throws Exception {

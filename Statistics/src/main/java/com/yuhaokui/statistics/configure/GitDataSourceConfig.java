@@ -18,21 +18,6 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.yuhaokui.statistics.mapper.git")
 public class GitDataSourceConfig {
 
-    @Primary
-    @Bean(name = "gitDataSource")
-    @ConfigurationProperties("spring.datasource.git")
-    public DataSource masterDataSource() {
-        return DataSourceBuilder.create().build();
-    }
-
-//    @Bean(name = "gitSqlSessionFactory")
-//    public SqlSessionFactory sqlSessionFactory(@Qualifier("gitDataSource") DataSource dataSource) throws Exception {
-//        SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
-//        sessionFactoryBean.setDataSource(dataSource);
-//        sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-//                .getResources("classpath:com/yuhaokui/statistics/mapper/git/*.xml"));
-//        return sessionFactoryBean.getObject();
-//    }
 
     @Bean(name = "gitTemplate")
     public JdbcTemplate gitTemplate(@Qualifier("gitDataSource") DataSource dataSource) {
