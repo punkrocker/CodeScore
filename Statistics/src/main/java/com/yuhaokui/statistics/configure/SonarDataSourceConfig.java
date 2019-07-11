@@ -18,17 +18,6 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.yuhaokui.statistics.mapper.sonar")
 public class SonarDataSourceConfig {
 
-
-
-//    @Bean(name = "sonarSqlSessionFactory")
-//    public SqlSessionFactory sqlSessionFactory(@Qualifier("sonarDataSource") DataSource dataSource) throws Exception {
-//        SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
-//        sessionFactoryBean.setDataSource(dataSource);
-//        sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-//                .getResources("classpath:com/yuhaokui/statistics/mapper/sonar/*.xml"));
-//        return sessionFactoryBean.getObject();
-//    }
-
     @Bean(name = "sonarTemplate")
     public JdbcTemplate gitTemplate(@Qualifier("sonarDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
