@@ -17,6 +17,12 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = "com.yuhaokui.statistics.mapper.sonar")
 public class SonarDataSourceConfig {
+    @Bean(name = "sonarDataSource")
+    @Qualifier(value = "sonarDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.sonar")
+    public DataSource sonarDataSource() {
+        return DataSourceBuilder.create().build();
+    }
 
     @Bean(name = "sonarTemplate")
     public JdbcTemplate gitTemplate(@Qualifier("sonarDataSource") DataSource dataSource) {

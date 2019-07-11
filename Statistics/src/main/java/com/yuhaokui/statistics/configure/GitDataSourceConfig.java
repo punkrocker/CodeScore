@@ -17,7 +17,13 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = "com.yuhaokui.statistics.mapper.git")
 public class GitDataSourceConfig {
-
+    @Primary
+    @Bean(name = "gitDataSource")
+    @Qualifier(value = "gitDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.git")
+    public DataSource gitDataSource() {
+        return DataSourceBuilder.create().build();
+    }
 
     @Bean(name = "gitTemplate")
     public JdbcTemplate gitTemplate(@Qualifier("gitDataSource") DataSource dataSource) {
