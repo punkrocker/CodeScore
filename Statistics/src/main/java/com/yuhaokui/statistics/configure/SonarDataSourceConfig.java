@@ -2,7 +2,9 @@ package com.yuhaokui.statistics.configure;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -15,17 +17,22 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.yuhaokui.statistics.mapper.sonar")
+@MapperScan(basePackages = "com.yuhaokui.statistics.mapper.sonar", sqlSessionFactoryRef = "sqlSessionFactorySonar")
 public class SonarDataSourceConfig {
-    @Bean(name = "sonarDataSource")
-    @Qualifier(value = "sonarDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.sonar")
-    public DataSource sonarDataSource() {
-        return DataSourceBuilder.create().build();
+    @Autowired
+    @Qualifier("sonarDataSource")
+    private DataSource dataSource;
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactorySonar() throws Exception {
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        factoryBean.setDataSource(dataSource);
+        return factoryBean.getObject();
     }
 
-    @Bean(name = "sonarTemplate")
-    public JdbcTemplate gitTemplate(@Qualifier("sonarDataSource") DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplateSonar() throws Exception{
+        SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactorySonar());
+        return template;
     }
 }

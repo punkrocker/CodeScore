@@ -2,7 +2,9 @@ package com.yuhaokui.statistics.configure;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -15,18 +17,22 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.yuhaokui.statistics.mapper.git")
+@MapperScan(basePackages = "com.yuhaokui.statistics.mapper.git", sqlSessionFactoryRef = "sqlSessionFactoryGit")
 public class GitDataSourceConfig {
-    @Primary
-    @Bean(name = "gitDataSource")
-    @Qualifier(value = "gitDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.git")
-    public DataSource gitDataSource() {
-        return DataSourceBuilder.create().build();
+    @Autowired
+    @Qualifier("gitDataSource")
+    private DataSource dataSource;
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactoryGit() throws Exception {
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        factoryBean.setDataSource(dataSource);
+        return factoryBean.getObject();
     }
 
-    @Bean(name = "gitTemplate")
-    public JdbcTemplate gitTemplate(@Qualifier("gitDataSource") DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplateGit() throws Exception{
+        SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactoryGit());
+        return template;
     }
 }
