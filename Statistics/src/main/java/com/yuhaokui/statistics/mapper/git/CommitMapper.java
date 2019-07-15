@@ -11,6 +11,7 @@ import java.util.List;
 
 @Mapper
 @Repository
+@Qualifier("GitDataSourceConfig")
 public interface CommitMapper {
     List<ProjectCommit> getProjectCommitCounts(@Param("beginDate") String beginDate, @Param("endDate") String endDate);
 

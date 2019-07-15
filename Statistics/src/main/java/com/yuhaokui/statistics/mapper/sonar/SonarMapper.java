@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper
 @Repository
+@Qualifier("SonarDataSourceConfig")
 public interface SonarMapper {
     List<SonarProject> getSonarProject();
     List<SonarResult> getSonarResult();
