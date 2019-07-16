@@ -34,7 +34,7 @@ public class ProjectController {
             if (!workPath.startsWith(AppConst.ERROR_INFO))
                 System.out.println(sonarUtil.checkConfigFile(workPath));
         });
-        return "success";
+        return String.valueOf(projectCommits.size());
     }
 
     @RequestMapping("/scan")
