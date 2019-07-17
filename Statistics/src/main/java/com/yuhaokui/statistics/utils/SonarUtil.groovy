@@ -24,6 +24,7 @@ class SonarUtil {
         File configFile = new File(filePath)
         if (!configFile.exists()) {
             changeFileContent(configFile)
+            println(filePath)
         }
         filePath
     }

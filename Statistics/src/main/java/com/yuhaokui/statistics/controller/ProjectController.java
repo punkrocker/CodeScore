@@ -32,7 +32,7 @@ public class ProjectController {
         projectCommits.forEach((commitInfo) -> {
             String workPath = gitUtil.clone(commitInfo.getGitPath());
             if (!workPath.startsWith(AppConst.ERROR_INFO))
-                System.out.println(sonarUtil.checkConfigFile(workPath));
+                sonarUtil.checkConfigFile(workPath);
         });
         return String.valueOf(projectCommits.size());
     }
