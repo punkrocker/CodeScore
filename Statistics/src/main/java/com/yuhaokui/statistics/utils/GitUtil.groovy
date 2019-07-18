@@ -34,11 +34,15 @@ class GitUtil {
         if (!destFile.exists()) {
             destFile.mkdir()
         }
-        String cmd = "git clone " + gitAddr + " " + GitUtil.workSpace + remotePath
+        String destPath = GitUtil.workSpace + remotePath
+        if (new File(destPath).exists()) {
+            return AppConst.ERROR_INFO + destPath
+        }
+        String cmd = "git clone " + gitAddr + " " + destPath
         cmd.execute().text
-        destFile = new File(GitUtil.workSpace + remotePath)
+        destFile = new File(destPath)
         if (!destFile.exists()) {
-            return AppConst.ERROR_INFO + GitUtil.workSpace + remotePath
+            return AppConst.ERROR_INFO + destPath
         }
         GitUtil.workSpace + remotePath
     }
