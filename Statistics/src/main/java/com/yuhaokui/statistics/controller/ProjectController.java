@@ -38,8 +38,14 @@ public class ProjectController {
     }
 
     @RequestMapping("/scan")
-    public String scan() {
-        return "success";
+    public List<String> scan() {
+        SonarUtil sonarUtil = new SonarUtil();
+        List<String> destPaths = (List<String>) sonarUtil.getDestPath(GitUtil.getWorkSpace());
+        destPaths.parallelStream().parallel().forEach((destPath) -> {
+            System.out.println(destPath);
+            sonarUtil.scanProject(destPath);
+        });
+        return destPaths;
     }
 
     @RequestMapping("/sonar")
