@@ -3,8 +3,12 @@ package com.yuhaokui.statistics.utils
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
+import java.nio.file.Path
+
 @Component
 class SonarUtil {
+    String configFile = 'sonar-project.properties'
+
     static String sonarDir
 
     @Value('${sonar.dir}')
@@ -20,7 +24,7 @@ class SonarUtil {
     }
 
     String checkConfigFile(String dir) {
-        String filePath = dir + File.separatorChar + 'sonar-project.properties'
+        String filePath = dir + File.separatorChar + configFile
         File configFile = new File(filePath)
         if (!configFile.exists()) {
             changeFileContent(configFile)
@@ -63,5 +67,27 @@ class SonarUtil {
         File dir = new File(projectDir)
         Process scanProcess = Runtime.getRuntime().exec(scanCmd, null, dir)
         scanProcess.waitFor()
+    }
+
+    def getDestPath(String path) {
+        List<String> destPaths = new ArrayList<>()
+        getSonarPath(path, destPaths)
+        destPaths
+    }
+
+    //获取带sonar配置文件的path
+    def getSonarPath(String path, List<String> destPaths) {
+        if (new File(path + File.separatorChar + configFile).exists())
+            destPaths.add(path)
+        else {
+            File parentPath = new File(path)
+            File[] fileLists = parentPath.listFiles()
+
+            for (int i = 0; i < fileLists.length; i++) { // 循环遍历这个集合内容
+                if (fileLists[i].isDirectory()) {    //判断元素是不是一个目录
+                    getSonarPath(fileLists[i].path, destPaths)
+                }
+            }
+        }
     }
 }
