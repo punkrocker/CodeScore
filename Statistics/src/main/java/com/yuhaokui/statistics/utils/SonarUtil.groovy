@@ -83,11 +83,10 @@ class SonarUtil {
             File parentPath = new File(path)
             File[] fileLists = parentPath.listFiles()
 
-            for (int i = 0; i < fileLists.length; i++) { // 循环遍历这个集合内容
-                if (fileLists[i].isDirectory()) {    //判断元素是不是一个目录
-                    getSonarPath(fileLists[i].path, destPaths)
+            for (File subPath : fileLists)
+                if (subPath.isDirectory()) {    //判断元素是不是一个目录
+                    getSonarPath(subPath.path, destPaths)
                 }
-            }
         }
     }
 }
